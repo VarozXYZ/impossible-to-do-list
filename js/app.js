@@ -117,9 +117,14 @@ function completeTask(id) {
     }
   }
   
+  const wasCompleted = task.completed;
   task.completed = !task.completed;
   renderTasks();
   saveTasks(tasks);
+  
+  if (!wasCompleted && task.completed) {
+    triggerConfetti();
+  }
 }
 
 function deleteTask(id) {

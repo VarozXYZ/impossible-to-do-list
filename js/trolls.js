@@ -138,3 +138,40 @@ function deactivateClingyCard() {
   }
 }
 
+function triggerConfetti() {
+  const colors = ['#FF6B6B', '#4ECDC4', '#FFE66D', '#2ECC71', '#E74C3C', '#9B59B6'];
+  const confettiCount = 50;
+  
+  for (let i = 0; i < confettiCount; i++) {
+    const confetti = document.createElement('div');
+    confetti.style.position = 'fixed';
+    confetti.style.width = '10px';
+    confetti.style.height = '10px';
+    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    confetti.style.left = Math.random() * window.innerWidth + 'px';
+    confetti.style.top = '-10px';
+    confetti.style.borderRadius = '50%';
+    confetti.style.zIndex = '9999';
+    confetti.style.pointerEvents = 'none';
+    
+    const angle = (Math.random() - 0.5) * 60;
+    const velocity = 2 + Math.random() * 3;
+    const rotation = Math.random() * 360;
+    
+    confetti.style.transform = `rotate(${rotation}deg)`;
+    confetti.style.transition = 'all 3s ease-out';
+    
+    document.body.appendChild(confetti);
+    
+    setTimeout(() => {
+      confetti.style.left = (parseFloat(confetti.style.left) + Math.sin(angle * Math.PI / 180) * 200) + 'px';
+      confetti.style.top = window.innerHeight + 10 + 'px';
+      confetti.style.opacity = '0';
+    }, 10);
+    
+    setTimeout(() => {
+      confetti.remove();
+    }, 3000);
+  }
+}
+
