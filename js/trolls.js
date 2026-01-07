@@ -70,30 +70,27 @@ function removeMirrorText(cardElement) {
 function activateShyDeleteButton(deleteButton) {
   if (!deleteButton) return;
   
-  const cardElement = deleteButton.closest('.task-card');
-  if (!cardElement) return;
-  
   const randomOffsetX = (Math.random() - 0.5) * 100;
   const randomOffsetY = (Math.random() - 0.5) * 100;
   
-  deleteButton.style.transform = `translate(${randomOffsetX}px, ${randomOffsetY}px) scale(0.5)`;
-  deleteButton.style.transition = 'all 0.3s ease';
-  deleteButton.style.pointerEvents = 'none';
+  deleteButton.style.setProperty('--shy-x', randomOffsetX + 'px');
+  deleteButton.style.setProperty('--shy-y', randomOffsetY + 'px');
+  deleteButton.classList.add('shy');
   
   setTimeout(() => {
-    deleteButton.style.transform = '';
-    deleteButton.style.pointerEvents = '';
+    deleteButton.classList.remove('shy');
+    deleteButton.style.removeProperty('--shy-x');
+    deleteButton.style.removeProperty('--shy-y');
   }, 500);
 }
 
 function fakeComplete(cardElement) {
   if (!cardElement) return;
   
-  cardElement.classList.add('completed');
-  cardElement.style.transition = 'all 0.3s ease';
+  cardElement.classList.add('completed', 'fake-complete');
   
   setTimeout(() => {
-    cardElement.classList.remove('completed');
+    cardElement.classList.remove('completed', 'fake-complete');
   }, 1000);
 }
 
@@ -106,7 +103,7 @@ function activateClingyCard(cardElement) {
   clingyCardElement = cardElement;
   cardElement.style.position = 'fixed';
   cardElement.style.zIndex = '1000';
-  cardElement.style.transition = 'none';
+  cardElement.classList.add('clingy');
   
   clingyMouseMoveHandler = (e) => {
     if (clingyCardElement) {
@@ -129,11 +126,11 @@ function deactivateClingyCard() {
   }
   
   if (clingyCardElement) {
+    clingyCardElement.classList.remove('clingy');
     clingyCardElement.style.position = '';
     clingyCardElement.style.left = '';
     clingyCardElement.style.top = '';
     clingyCardElement.style.zIndex = '';
-    clingyCardElement.style.transition = '';
     clingyCardElement = null;
   }
 }
@@ -144,6 +141,7 @@ function triggerConfetti() {
   
   for (let i = 0; i < confettiCount; i++) {
     const confetti = document.createElement('div');
+    confetti.className = 'confetti-particle';
     confetti.style.position = 'fixed';
     confetti.style.width = '10px';
     confetti.style.height = '10px';
@@ -153,21 +151,9 @@ function triggerConfetti() {
     confetti.style.borderRadius = '50%';
     confetti.style.zIndex = '9999';
     confetti.style.pointerEvents = 'none';
-    
-    const angle = (Math.random() - 0.5) * 60;
-    const velocity = 2 + Math.random() * 3;
-    const rotation = Math.random() * 360;
-    
-    confetti.style.transform = `rotate(${rotation}deg)`;
-    confetti.style.transition = 'all 3s ease-out';
+    confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
     
     document.body.appendChild(confetti);
-    
-    setTimeout(() => {
-      confetti.style.left = (parseFloat(confetti.style.left) + Math.sin(angle * Math.PI / 180) * 200) + 'px';
-      confetti.style.top = window.innerHeight + 10 + 'px';
-      confetti.style.opacity = '0';
-    }, 10);
     
     setTimeout(() => {
       confetti.remove();
