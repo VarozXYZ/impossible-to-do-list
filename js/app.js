@@ -12,14 +12,8 @@ function addTask(title) {
     title: title.trim(),
     completed: false,
     createdAt: new Date().toISOString(),
-    trollCounters: {
-      runaway: 0,
-      blur: 0,
-      mirror: false,
-      shyDelete: 0,
-      fakeComplete: 0,
-      clingy: false
-    }
+    trollType: assignRandomTroll(),
+    trollCounter: 0
   };
   
   tasks.push(task);
