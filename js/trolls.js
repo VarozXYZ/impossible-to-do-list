@@ -67,3 +67,22 @@ function removeMirrorText(cardElement) {
   }
 }
 
+function activateShyDeleteButton(deleteButton) {
+  if (!deleteButton) return;
+  
+  const cardElement = deleteButton.closest('.task-card');
+  if (!cardElement) return;
+  
+  const randomOffsetX = (Math.random() - 0.5) * 100;
+  const randomOffsetY = (Math.random() - 0.5) * 100;
+  
+  deleteButton.style.transform = `translate(${randomOffsetX}px, ${randomOffsetY}px) scale(0.5)`;
+  deleteButton.style.transition = 'all 0.3s ease';
+  deleteButton.style.pointerEvents = 'none';
+  
+  setTimeout(() => {
+    deleteButton.style.transform = '';
+    deleteButton.style.pointerEvents = '';
+  }, 500);
+}
+

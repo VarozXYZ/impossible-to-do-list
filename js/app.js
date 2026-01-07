@@ -87,6 +87,19 @@ function attachTrollBehaviors() {
         removeMirrorText(cardElement);
       });
     }
+    
+    if (task.trollType === 'shyDelete' && canActivateTroll(task)) {
+      const deleteButton = cardElement.querySelector('.btn-delete');
+      if (deleteButton) {
+        deleteButton.addEventListener('mouseenter', () => {
+          if (canActivateTroll(task)) {
+            activateShyDeleteButton(deleteButton);
+            incrementTrollCounter(task);
+            saveTasks(tasks);
+          }
+        });
+      }
+    }
   });
 }
 
