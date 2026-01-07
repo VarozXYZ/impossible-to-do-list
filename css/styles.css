@@ -1,6 +1,6 @@
 :root {
   --primary: #ff6b6b;
-  --background-light: #f0f4f8;
+  --background-light: #fdfbf7;
   --background-dark: #230f0f;
   --paper: #fffdf5;
   --ink: #2C3E50;
@@ -369,6 +369,7 @@ body {
   border: 2px solid var(--ink);
   box-shadow: 2px 2px 0px 0px var(--background-dark);
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .add-btn:hover {
@@ -381,6 +382,12 @@ body {
 
 .add-btn-text {
   display: none;
+}
+
+.add-btn-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+  font-weight: normal;
 }
 
 @media (min-width: 640px) {
