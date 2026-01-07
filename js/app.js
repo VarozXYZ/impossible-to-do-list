@@ -166,6 +166,7 @@ function deleteTask(id) {
     }
   }
   
+  deactivateClingyCard();
   tasks = tasks.filter(t => t.id !== id);
   renderTasks();
   saveTasks(tasks);
@@ -177,17 +178,27 @@ taskForm.addEventListener('submit', (e) => {
 });
 
 taskList.addEventListener('click', (e) => {
-  const id = e.target.getAttribute('data-id') || e.target.closest('[data-id]')?.getAttribute('data-id');
-  if (!id) return;
+  const deleteBtn = e.target.closest('.delete-btn');
+  const checkBtn = e.target.closest('.check-btn');
   
-  if (e.target.classList.contains('check-btn') || e.target.closest('.check-btn')) {
-    if (!e.target.closest('.check-btn')?.classList.contains('completed-check')) {
-      completeTask(id);
-    }
-  } else if (e.target.classList.contains('delete-btn') || e.target.closest('.delete-btn')) {
-    if (!e.target.closest('.delete-btn')?.classList.contains('disabled')) {
+  if (deleteBtn && !deleteBtn.classList.contains('disabled')) {
+    e.preventDefault();
+    e.stopPropagation();
+    const id = deleteBtn.getAttribute('data-id');
+    if (id) {
       deleteTask(id);
     }
+    return;
+  }
+  
+  if (checkBtn && !checkBtn.classList.contains('completed-check')) {
+    e.preventDefault();
+    e.stopPropagation();
+    const id = checkBtn.getAttribute('data-id');
+    if (id) {
+      completeTask(id);
+    }
+    return;
   }
 });
 
