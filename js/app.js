@@ -79,3 +79,6 @@ taskList.addEventListener('click', (e) => {
   }
 });
 
+tasks = loadTasks();
+renderTasks();
+
