@@ -206,9 +206,10 @@ body {
 
 .struggle-subtitle {
   font-size: 1.5rem;
-  color: rgba(44, 62, 80, 0.7);
+  color: var(--ink);
   margin-top: 0.5rem;
   margin-left: 1rem;
+  font-weight: 500;
 }
 
 .level-badge {
@@ -323,7 +324,6 @@ body {
 
 .task-input-container:hover {
   box-shadow: 5px 5px 0px 0px rgba(44, 62, 80, 1);
-  transform: translateY(-4px);
 }
 
 .input-icon {
