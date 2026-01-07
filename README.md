@@ -192,10 +192,6 @@ Tested and working in:
 
 This project is created for educational purposes.
 
-## 👤 Author
-
-Created as part of a web development course project.
-
 ---
 
 **Remember**: The trolls are just having fun with you! After a few attempts, they'll give up and let you complete your tasks. 😄
