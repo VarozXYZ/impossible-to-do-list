@@ -569,3 +569,93 @@ body {
   color: white;
   transform: rotate(90deg);
 }
+
+@media (max-width: 768px) {
+  .sticky-header {
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
+  }
+  
+  .header-paper {
+    padding: 0.5rem;
+  }
+  
+  .app-title {
+    font-size: 1.5rem;
+  }
+  
+  .bounce-icon {
+    font-size: 2rem;
+  }
+  
+  .task-input {
+    font-size: 1.25rem;
+    padding: 0.75rem;
+    height: 3.5rem;
+  }
+  
+  .add-btn {
+    height: 3.5rem;
+    padding: 0 1.5rem;
+    font-size: 1rem;
+  }
+  
+  .task-card {
+    padding: 1rem;
+    gap: 1rem;
+  }
+  
+  .task-title {
+    font-size: 1.25rem;
+  }
+  
+  .check-btn {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  
+  .check-btn .material-symbols-outlined {
+    font-size: 1.5rem;
+  }
+  
+  .delete-btn {
+    width: 2rem;
+    height: 2rem;
+  }
+  
+  .delete-btn .material-symbols-outlined {
+    font-size: 1.5rem;
+  }
+  
+  .toast-container {
+    bottom: 1rem;
+    right: 1rem;
+    left: 1rem;
+  }
+  
+  .toast-paper {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-title {
+    font-size: 1.25rem;
+  }
+  
+  .bounce-icon {
+    font-size: 1.75rem;
+  }
+  
+  .task-input {
+    font-size: 1rem;
+  }
+  
+  .task-title {
+    font-size: 1.125rem;
+  }
+  
+  .bounce-question {
+    display: none;
+  }
+}
