@@ -144,6 +144,14 @@ function completeTask(id) {
   
   const wasCompleted = task.completed;
   task.completed = !task.completed;
+  
+  // If task was just completed, move it to the end of the list
+  if (task.completed && !wasCompleted) {
+    const taskIndex = tasks.indexOf(task);
+    tasks.splice(taskIndex, 1);
+    tasks.push(task);
+  }
+  
   renderTasks();
   saveTasks(tasks);
 }
