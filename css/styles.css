@@ -617,7 +617,6 @@ body {
   bottom: 2rem;
   right: 2rem;
   z-index: 50;
-  animation: bounce 1s infinite;
 }
 
 .toast-container.hidden {
@@ -635,27 +634,16 @@ body {
   gap: 1rem;
   max-width: 24rem;
   box-shadow: 4px 4px 0px 0px rgba(255, 255, 255, 0.5);
-  transform: rotate(2deg);
   transition: transform 0.3s;
 }
 
 .toast-paper:hover {
-  transform: scale(1.05) rotate(2deg);
+  transform: scale(1.05);
 }
 
 .toast-icon {
   color: var(--warning-yellow);
   font-size: 2.5rem;
-  animation: spin 3s linear infinite;
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 .toast-content {

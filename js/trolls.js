@@ -177,8 +177,12 @@ function showToast(title, message) {
 
 function hideToast() {
   const toast = document.getElementById('toast');
-  toast.classList.add('hidden');
+  if (toast) {
+    toast.classList.add('hidden');
+  }
 }
+
+window.hideToast = hideToast;
 
 function changeDifficulty() {
   const levels = ['easy', 'medium', 'nightmare'];
