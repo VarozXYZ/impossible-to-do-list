@@ -90,3 +90,66 @@ body {
     padding: 0 2rem;
   }
 }
+
+.sticky-header {
+  width: 100%;
+  padding-top: 1.5rem;
+  padding-bottom: 0.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: var(--background-light);
+}
+
+.header-paper {
+  background-color: var(--paper);
+  border: 2px solid var(--ink);
+  box-shadow: 3px 3px 0px 0px rgba(44, 62, 80, 1);
+  border-radius: 1rem 0.5rem 0.5rem 0.25rem;
+  padding: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transform: rotate(-1deg);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.bounce-icon {
+  color: var(--ink);
+  animation: bounce 1s infinite;
+  font-size: 2.5rem;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.app-title {
+  color: var(--ink);
+  font-size: 2rem;
+  letter-spacing: 0.1em;
+  transform: rotate(-2deg);
+  margin: 0;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  gap: 2rem;
+}

@@ -12,11 +12,19 @@
     <link rel="stylesheet" href="css/styles.css">
   </head>
   <body>
-    <div class="container-fluid">
-      <header class="text-center py-4">
-        <img src="Logo-impossible-to-do-list.png" alt="Logo" class="mb-3" style="max-height: 80px;">
-        <h1 class="display-4">Impossible To-Do List</h1>
-      </header>
+    <header class="sticky-header">
+      <div class="container">
+        <div class="header-paper">
+          <div class="header-left">
+            <span class="material-symbols-outlined bounce-icon" style="font-variation-settings: 'FILL' 1;">sentiment_very_dissatisfied</span>
+            <h1 class="app-title font-display">IMPOSSIBLE LIST</h1>
+          </div>
+        </div>
+      </div>
+    </header>
+    
+    <main class="main-content">
+      <div class="container">
       
       <div class="row justify-content-center mb-4">
         <div class="col-md-8">
@@ -34,10 +42,8 @@
         </div>
       </div>
       
-      <footer class="text-center py-4 mt-5">
-        <p class="text-muted">Impossible To-Do List © 2026</p>
-      </footer>
-    </div>
+      </div>
+    </main>
     <script src="js/storage.js"></script>
     <script src="js/trolls.js"></script>
     <script src="js/app.js"></script>
