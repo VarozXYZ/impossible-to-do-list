@@ -35,3 +35,19 @@ function activateRunawayCard(cardElement) {
   cardElement.style.transition = 'all 0.5s ease';
 }
 
+function activateBlurryVision(cardElement) {
+  if (!cardElement) return;
+  const contentElement = cardElement.querySelector('.task-content');
+  if (contentElement) {
+    contentElement.classList.add('blurry-text');
+  }
+}
+
+function clearBlur(cardElement) {
+  if (!cardElement) return;
+  const contentElement = cardElement.querySelector('.task-content');
+  if (contentElement) {
+    contentElement.classList.remove('blurry-text');
+  }
+}
+

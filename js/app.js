@@ -58,6 +58,23 @@ function attachTrollBehaviors() {
         }
       });
     }
+    
+    if (task.trollType === 'blur' && canActivateTroll(task)) {
+      const contentElement = cardElement.querySelector('.task-content');
+      if (contentElement) {
+        contentElement.addEventListener('mouseenter', () => {
+          if (canActivateTroll(task)) {
+            activateBlurryVision(cardElement);
+            incrementTrollCounter(task);
+            saveTasks(tasks);
+          }
+        });
+      }
+      
+      cardElement.addEventListener('click', () => {
+        clearBlur(cardElement);
+      });
+    }
   });
 }
 

@@ -162,3 +162,8 @@ footer p {
   margin: 0;
 }
 
+.blurry-text {
+  filter: blur(5px);
+  transition: filter 0.3s ease;
+}
+
