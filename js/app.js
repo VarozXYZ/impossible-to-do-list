@@ -27,8 +27,7 @@ function renderTasks() {
   
   tasks.forEach((task, index) => {
     const wrapper = document.createElement('li');
-    const rotation = index % 2 === 0 ? 'rotate-1' : 'rotate-neg-1';
-    wrapper.className = `task-card-wrapper ${rotation} ${task.completed ? 'completed-card' : ''}`;
+    wrapper.className = `task-card-wrapper ${task.completed ? 'completed-card' : ''}`;
     
     const card = document.createElement('div');
     card.className = `task-card shape-card shadow-sketch ${task.completed ? 'completed-bg' : ''}`;
@@ -191,6 +190,25 @@ taskList.addEventListener('click', (e) => {
     }
   }
 });
+
+const levelBtn = document.getElementById('levelBtn');
+if (levelBtn) {
+  levelBtn.addEventListener('click', changeDifficulty);
+}
+
+const infoBtn = document.getElementById('infoBtn');
+if (infoBtn) {
+  infoBtn.addEventListener('click', showInfoPopup);
+}
+
+const infoPopup = document.getElementById('infoPopup');
+if (infoPopup) {
+  infoPopup.addEventListener('click', (e) => {
+    if (e.target === infoPopup) {
+      hideInfoPopup();
+    }
+  });
+}
 
 tasks = loadTasks();
 renderTasks();

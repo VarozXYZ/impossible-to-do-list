@@ -26,6 +26,23 @@
     <main class="main-content">
       <div class="container">
       
+      <div class="daily-struggle-section">
+        <div class="struggle-content">
+          <h2 class="struggle-title font-display">
+            Daily <span class="struggle-word text-primary">
+              Struggle
+              <svg class="struggle-underline" preserveAspectRatio="none" viewBox="0 0 100 10">
+                <path d="M0,5 Q50,10 100,5" fill="none" stroke="currentColor" stroke-width="3"></path>
+              </svg>
+            </span>
+          </h2>
+          <p class="struggle-subtitle font-hand">Good luck finishing these. Seriously.</p>
+        </div>
+        <button id="levelBtn" class="level-badge shape-button font-hand">
+          Level: <span id="levelText">Nightmare</span>
+        </button>
+      </div>
+      
       <div class="task-input-wrapper">
         <div class="task-input-container shape-card shadow-sketch">
           <span class="material-symbols-outlined input-icon">edit</span>
@@ -37,7 +54,7 @@
             </button>
           </form>
         </div>
-        <div class="bounce-question">?</div>
+        <div class="bounce-question" id="infoBtn">?</div>
       </div>
       
       <div class="task-list-wrapper">
@@ -47,6 +64,18 @@
       
       </div>
     </main>
+    
+    <div id="infoPopup" class="info-popup hidden">
+      <div class="info-popup-content shadow-sketch">
+        <button class="info-popup-close" onclick="hideInfoPopup()">×</button>
+        <h3 class="info-popup-title font-display">About This App</h3>
+        <div class="info-popup-body font-hand">
+          <p>This is <strong>NOT</strong> a serious to-do list app!</p>
+          <p>It's designed to be playful and slightly frustrating. Each task gets a random "troll" behavior that makes it harder to complete - but don't worry, after a few attempts, the trolls stop and you can actually finish your tasks.</p>
+          <p>It's all in good fun! 😄</p>
+        </div>
+      </div>
+    </div>
     
     <div id="toast" class="toast-container hidden">
       <div class="toast-paper shadow-sketch">

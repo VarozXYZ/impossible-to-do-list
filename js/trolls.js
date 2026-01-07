@@ -1,5 +1,23 @@
 const TROLL_TYPES = ['runaway', 'blur', 'mirror', 'shyDelete', 'fakeComplete', 'clingy'];
-const DEFAULT_TROLL_LIMIT = 2;
+
+let difficultyLevel = 'nightmare';
+const DIFFICULTY_SETTINGS = {
+  easy: {
+    trollLimit: 1,
+    blurIntensity: 3,
+    name: 'Easy'
+  },
+  medium: {
+    trollLimit: 2,
+    blurIntensity: 5,
+    name: 'Medium'
+  },
+  nightmare: {
+    trollLimit: 3,
+    blurIntensity: 8,
+    name: 'Nightmare'
+  }
+};
 
 function assignRandomTroll() {
   const randomIndex = Math.floor(Math.random() * TROLL_TYPES.length);
@@ -8,7 +26,12 @@ function assignRandomTroll() {
 
 function canActivateTroll(task) {
   if (!task || !task.trollType) return false;
-  return task.trollCounter < DEFAULT_TROLL_LIMIT;
+  const limit = DIFFICULTY_SETTINGS[difficultyLevel].trollLimit;
+  return task.trollCounter < limit;
+}
+
+function getTrollLimit() {
+  return DIFFICULTY_SETTINGS[difficultyLevel].trollLimit;
 }
 
 function incrementTrollCounter(task) {
@@ -39,6 +62,8 @@ function activateBlurryVision(cardElement) {
   if (!cardElement) return;
   const contentElement = cardElement.querySelector('.task-title');
   if (contentElement) {
+    const blurIntensity = DIFFICULTY_SETTINGS[difficultyLevel].blurIntensity;
+    contentElement.style.filter = `blur(${blurIntensity}px)`;
     contentElement.classList.add('blurry-text');
   }
 }
@@ -47,6 +72,7 @@ function clearBlur(cardElement) {
   if (!cardElement) return;
   const contentElement = cardElement.querySelector('.task-title');
   if (contentElement) {
+    contentElement.style.filter = '';
     contentElement.classList.remove('blurry-text');
   }
 }
@@ -178,5 +204,33 @@ function showToast(title, message) {
 function hideToast() {
   const toast = document.getElementById('toast');
   toast.classList.add('hidden');
+}
+
+function changeDifficulty() {
+  const levels = ['easy', 'medium', 'nightmare'];
+  const currentIndex = levels.indexOf(difficultyLevel);
+  const nextIndex = (currentIndex + 1) % levels.length;
+  difficultyLevel = levels[nextIndex];
+  
+  const levelText = document.getElementById('levelText');
+  if (levelText) {
+    levelText.textContent = DIFFICULTY_SETTINGS[difficultyLevel].name;
+  }
+  
+  showToast('Difficulty Changed!', `Now set to: ${DIFFICULTY_SETTINGS[difficultyLevel].name}`);
+}
+
+function showInfoPopup() {
+  const popup = document.getElementById('infoPopup');
+  if (popup) {
+    popup.classList.remove('hidden');
+  }
+}
+
+function hideInfoPopup() {
+  const popup = document.getElementById('infoPopup');
+  if (popup) {
+    popup.classList.add('hidden');
+  }
 }
 
