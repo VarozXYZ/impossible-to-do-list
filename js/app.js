@@ -40,6 +40,25 @@ function renderTasks() {
     
     taskList.appendChild(li);
   });
+  
+  attachTrollBehaviors();
+}
+
+function attachTrollBehaviors() {
+  tasks.forEach(task => {
+    const cardElement = document.querySelector(`[data-id="${task.id}"]`);
+    if (!cardElement || !task.trollType) return;
+    
+    if (task.trollType === 'runaway' && canActivateTroll(task)) {
+      cardElement.addEventListener('mouseenter', () => {
+        if (canActivateTroll(task)) {
+          activateRunawayCard(cardElement);
+          incrementTrollCounter(task);
+          saveTasks(tasks);
+        }
+      });
+    }
+  });
 }
 
 function completeTask(id) {

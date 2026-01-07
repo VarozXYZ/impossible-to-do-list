@@ -19,3 +19,19 @@ function incrementTrollCounter(task) {
   task.trollCounter++;
 }
 
+function activateRunawayCard(cardElement) {
+  if (!cardElement) return;
+  
+  const maxX = window.innerWidth - cardElement.offsetWidth;
+  const maxY = window.innerHeight - cardElement.offsetHeight;
+  
+  const randomX = Math.random() * maxX;
+  const randomY = Math.random() * maxY;
+  
+  cardElement.style.position = 'fixed';
+  cardElement.style.left = randomX + 'px';
+  cardElement.style.top = randomY + 'px';
+  cardElement.style.zIndex = '1000';
+  cardElement.style.transition = 'all 0.5s ease';
+}
+
