@@ -27,3 +27,23 @@ function addTask(title) {
   taskInput.value = '';
 }
 
+function renderTasks() {
+  taskList.innerHTML = '';
+  
+  tasks.forEach(task => {
+    const li = document.createElement('li');
+    li.className = 'task-card' + (task.completed ? ' completed' : '');
+    li.setAttribute('data-id', task.id);
+    
+    li.innerHTML = `
+      <div class="task-content">${task.title}</div>
+      <div class="task-actions">
+        <button class="btn-complete" data-id="${task.id}">Complete</button>
+        <button class="btn-delete" data-id="${task.id}">Delete</button>
+      </div>
+    `;
+    
+    taskList.appendChild(li);
+  });
+}
+
