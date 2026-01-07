@@ -217,6 +217,7 @@ if (infoPopup) {
   });
 }
 
+
 tasks = loadTasks();
 renderTasks();
 

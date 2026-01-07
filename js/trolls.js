@@ -172,7 +172,7 @@ function showToast(title, message) {
   
   setTimeout(() => {
     hideToast();
-  }, 5000);
+  }, 2500);
 }
 
 function hideToast() {
