@@ -24,6 +24,7 @@ function addTask(title) {
   
   tasks.push(task);
   renderTasks();
+  saveTasks(tasks);
   taskInput.value = '';
 }
 
@@ -52,12 +53,14 @@ function completeTask(id) {
   if (task) {
     task.completed = !task.completed;
     renderTasks();
+    saveTasks(tasks);
   }
 }
 
 function deleteTask(id) {
   tasks = tasks.filter(t => t.id !== id);
   renderTasks();
+  saveTasks(tasks);
 }
 
 taskForm.addEventListener('submit', (e) => {
