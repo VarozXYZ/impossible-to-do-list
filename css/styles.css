@@ -616,7 +616,7 @@ body {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
-  z-index: 50;
+  z-index: 9999;
 }
 
 .toast-container.hidden {
@@ -644,6 +644,16 @@ body {
 .toast-icon {
   color: var(--warning-yellow);
   font-size: 2.5rem;
+  animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .toast-content {
