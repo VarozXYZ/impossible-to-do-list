@@ -86,3 +86,14 @@ function activateShyDeleteButton(deleteButton) {
   }, 500);
 }
 
+function fakeComplete(cardElement) {
+  if (!cardElement) return;
+  
+  cardElement.classList.add('completed');
+  cardElement.style.transition = 'all 0.3s ease';
+  
+  setTimeout(() => {
+    cardElement.classList.remove('completed');
+  }, 1000);
+}
+

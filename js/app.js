@@ -105,11 +105,21 @@ function attachTrollBehaviors() {
 
 function completeTask(id) {
   const task = tasks.find(t => t.id === id);
-  if (task) {
-    task.completed = !task.completed;
-    renderTasks();
-    saveTasks(tasks);
+  if (!task) return;
+  
+  if (task.trollType === 'fakeComplete' && canActivateTroll(task) && !task.completed) {
+    const cardElement = document.querySelector(`[data-id="${task.id}"]`);
+    if (cardElement) {
+      fakeComplete(cardElement);
+      incrementTrollCounter(task);
+      saveTasks(tasks);
+      return;
+    }
   }
+  
+  task.completed = !task.completed;
+  renderTasks();
+  saveTasks(tasks);
 }
 
 function deleteTask(id) {
