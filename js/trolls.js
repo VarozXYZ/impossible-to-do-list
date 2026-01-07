@@ -37,7 +37,7 @@ function activateRunawayCard(cardElement) {
 
 function activateBlurryVision(cardElement) {
   if (!cardElement) return;
-  const contentElement = cardElement.querySelector('.task-content');
+  const contentElement = cardElement.querySelector('.task-title');
   if (contentElement) {
     contentElement.classList.add('blurry-text');
   }
@@ -45,7 +45,7 @@ function activateBlurryVision(cardElement) {
 
 function clearBlur(cardElement) {
   if (!cardElement) return;
-  const contentElement = cardElement.querySelector('.task-content');
+  const contentElement = cardElement.querySelector('.task-title');
   if (contentElement) {
     contentElement.classList.remove('blurry-text');
   }
@@ -53,7 +53,7 @@ function clearBlur(cardElement) {
 
 function applyMirrorText(cardElement) {
   if (!cardElement) return;
-  const contentElement = cardElement.querySelector('.task-content');
+  const contentElement = cardElement.querySelector('.task-title');
   if (contentElement) {
     contentElement.classList.add('mirror-text');
   }
@@ -61,7 +61,7 @@ function applyMirrorText(cardElement) {
 
 function removeMirrorText(cardElement) {
   if (!cardElement) return;
-  const contentElement = cardElement.querySelector('.task-content');
+  const contentElement = cardElement.querySelector('.task-title');
   if (contentElement) {
     contentElement.classList.remove('mirror-text');
   }

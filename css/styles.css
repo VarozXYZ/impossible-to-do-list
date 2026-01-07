@@ -275,3 +275,214 @@ body {
   flex-direction: column;
   gap: 1.25rem;
 }
+
+.task-card-wrapper {
+  width: 100%;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.task-card-wrapper.rotate-1 {
+  transform: rotate(1deg);
+}
+
+.task-card-wrapper.rotate-neg-1 {
+  transform: rotate(-1deg);
+}
+
+.task-card-wrapper:hover {
+  transform: rotate(0deg);
+  z-index: 10;
+}
+
+.task-card {
+  background-color: var(--paper);
+  border: 2px solid var(--ink);
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.task-card:hover {
+  box-shadow: 5px 5px 0px 0px rgba(44, 62, 80, 1);
+}
+
+.task-content-wrapper {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+}
+
+.task-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0;
+  transition: color 0.3s;
+  word-break: break-word;
+}
+
+.task-card:hover .task-title {
+  color: var(--primary);
+}
+
+.check-btn {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  background: transparent;
+  color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  flex-shrink: 0;
+  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.1);
+}
+
+.check-btn:hover {
+  background-color: var(--secondary-teal);
+  color: white;
+}
+
+.check-btn .material-symbols-outlined {
+  font-size: 1.875rem;
+  font-weight: 700;
+}
+
+.check-btn.completed-check {
+  background-color: var(--ink);
+  color: var(--secondary-teal);
+  cursor: default;
+}
+
+.delete-btn {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  flex-shrink: 0;
+  margin-left: 1rem;
+}
+
+.delete-btn:hover {
+  color: #dc2626;
+  transform: scale(1.1) rotate(12deg);
+}
+
+.delete-btn.disabled {
+  color: rgba(44, 62, 80, 0.3);
+  cursor: not-allowed;
+}
+
+.delete-btn.disabled:hover {
+  transform: none;
+  color: rgba(44, 62, 80, 0.3);
+}
+
+.delete-btn .material-symbols-outlined {
+  font-size: 1.875rem;
+}
+
+.task-card.completed-bg {
+  background-color: #e0e0e0;
+  border: 2px dashed rgba(44, 62, 80, 0.4);
+}
+
+.task-card-wrapper.completed-card {
+  opacity: 0.6;
+}
+
+.task-card-wrapper.completed-card:hover {
+  opacity: 1;
+}
+
+.completed-text {
+  color: rgba(44, 62, 80, 0.5);
+}
+
+.strikethrough-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 1rem;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}
+
+.blurry-text {
+  filter: blur(5px);
+  transition: filter 0.3s ease;
+}
+
+.mirror-text {
+  transform: scaleX(-1);
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+@keyframes fakeComplete {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.task-card.fake-complete {
+  animation: fakeComplete 1s ease-in-out;
+}
+
+@keyframes shrinkAndMove {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(var(--shy-x), var(--shy-y)) scale(0.5);
+  }
+}
+
+.delete-btn.shy {
+  animation: shrinkAndMove 0.3s ease-out forwards;
+  pointer-events: none;
+}
+
+.task-card.clingy {
+  transition: none;
+  cursor: grabbing;
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+.confetti-particle {
+  animation: confettiFall 3s ease-out forwards;
+}

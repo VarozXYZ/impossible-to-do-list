@@ -25,23 +25,49 @@ function addTask(title) {
 function renderTasks() {
   taskList.innerHTML = '';
   
-  tasks.forEach(task => {
-    const li = document.createElement('li');
-    li.className = 'task-card' + (task.completed ? ' completed' : '');
-    li.setAttribute('data-id', task.id);
+  tasks.forEach((task, index) => {
+    const wrapper = document.createElement('li');
+    const rotation = index % 2 === 0 ? 'rotate-1' : 'rotate-neg-1';
+    wrapper.className = `task-card-wrapper ${rotation} ${task.completed ? 'completed-card' : ''}`;
     
-    li.innerHTML = `
-      <div class="task-content">${task.title}</div>
-      <div class="task-actions">
-        <button class="btn-complete" data-id="${task.id}">Complete</button>
-        <button class="btn-delete" data-id="${task.id}">Delete</button>
-      </div>
-    `;
+    const card = document.createElement('div');
+    card.className = `task-card shape-card shadow-sketch ${task.completed ? 'completed-bg' : ''}`;
+    card.setAttribute('data-id', task.id);
     
-    taskList.appendChild(li);
+    if (task.completed) {
+      card.innerHTML = `
+        <div class="check-btn completed-check">
+          <span class="material-symbols-outlined">check</span>
+        </div>
+        <div class="task-content-wrapper">
+          <p class="task-title font-hand completed-text">${task.title}</p>
+          <svg class="strikethrough-svg" preserveAspectRatio="none" viewBox="0 0 100 10">
+            <path d="M0,5 Q50,0 100,8" fill="none" stroke="var(--primary)" stroke-width="3"></path>
+          </svg>
+        </div>
+        <button class="delete-btn disabled" data-id="${task.id}">
+          <span class="material-symbols-outlined">delete</span>
+        </button>
+      `;
+    } else {
+      card.innerHTML = `
+        <button class="check-btn" data-id="${task.id}">
+          <span class="material-symbols-outlined">check</span>
+        </button>
+        <div class="task-content-wrapper">
+          <p class="task-title font-hand">${task.title}</p>
+        </div>
+        <button class="delete-btn" data-id="${task.id}">
+          <span class="material-symbols-outlined">delete_forever</span>
+        </button>
+      `;
+    }
+    
+    wrapper.appendChild(card);
+    taskList.appendChild(wrapper);
     
     if (task.trollType === 'mirror' && canActivateTroll(task)) {
-      applyMirrorText(li);
+      applyMirrorText(card);
       incrementTrollCounter(task);
       saveTasks(tasks);
     }
@@ -66,7 +92,7 @@ function attachTrollBehaviors() {
     }
     
     if (task.trollType === 'blur' && canActivateTroll(task)) {
-      const contentElement = cardElement.querySelector('.task-content');
+      const contentElement = cardElement.querySelector('.task-title');
       if (contentElement) {
         contentElement.addEventListener('mouseenter', () => {
           if (canActivateTroll(task)) {
@@ -89,7 +115,7 @@ function attachTrollBehaviors() {
     }
     
     if (task.trollType === 'shyDelete' && canActivateTroll(task)) {
-      const deleteButton = cardElement.querySelector('.btn-delete');
+      const deleteButton = cardElement.querySelector('.delete-btn');
       if (deleteButton) {
         deleteButton.addEventListener('mouseenter', () => {
           if (canActivateTroll(task)) {
@@ -152,13 +178,17 @@ taskForm.addEventListener('submit', (e) => {
 });
 
 taskList.addEventListener('click', (e) => {
-  const id = e.target.getAttribute('data-id');
+  const id = e.target.getAttribute('data-id') || e.target.closest('[data-id]')?.getAttribute('data-id');
   if (!id) return;
   
-  if (e.target.classList.contains('btn-complete')) {
-    completeTask(id);
-  } else if (e.target.classList.contains('btn-delete')) {
-    deleteTask(id);
+  if (e.target.classList.contains('check-btn') || e.target.closest('.check-btn')) {
+    if (!e.target.closest('.check-btn')?.classList.contains('completed-check')) {
+      completeTask(id);
+    }
+  } else if (e.target.classList.contains('delete-btn') || e.target.closest('.delete-btn')) {
+    if (!e.target.closest('.delete-btn')?.classList.contains('disabled')) {
+      deleteTask(id);
+    }
   }
 });
 
