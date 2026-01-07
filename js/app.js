@@ -60,3 +60,19 @@ function deleteTask(id) {
   renderTasks();
 }
 
+taskForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  addTask(taskInput.value);
+});
+
+taskList.addEventListener('click', (e) => {
+  const id = e.target.getAttribute('data-id');
+  if (!id) return;
+  
+  if (e.target.classList.contains('btn-complete')) {
+    completeTask(id);
+  } else if (e.target.classList.contains('btn-delete')) {
+    deleteTask(id);
+  }
+});
+
