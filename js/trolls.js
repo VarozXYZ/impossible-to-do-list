@@ -161,32 +161,6 @@ function deactivateClingyCard() {
   }
 }
 
-function triggerConfetti() {
-  const colors = ['#FF6B6B', '#4ECDC4', '#FFE66D', '#2ECC71', '#E74C3C', '#9B59B6'];
-  const confettiCount = 50;
-  
-  for (let i = 0; i < confettiCount; i++) {
-    const confetti = document.createElement('div');
-    confetti.className = 'confetti-particle';
-    confetti.style.position = 'fixed';
-    confetti.style.width = '10px';
-    confetti.style.height = '10px';
-    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-    confetti.style.left = Math.random() * window.innerWidth + 'px';
-    confetti.style.top = '-10px';
-    confetti.style.borderRadius = '50%';
-    confetti.style.zIndex = '9999';
-    confetti.style.pointerEvents = 'none';
-    confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
-    
-    document.body.appendChild(confetti);
-    
-    setTimeout(() => {
-      confetti.remove();
-    }, 3000);
-  }
-}
-
 function showToast(title, message) {
   const toast = document.getElementById('toast');
   const toastTitle = toast.querySelector('.toast-title');

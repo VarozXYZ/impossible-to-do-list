@@ -44,7 +44,7 @@ function renderTasks() {
             <path d="M0,5 Q50,0 100,8" fill="none" stroke="var(--primary)" stroke-width="3"></path>
           </svg>
         </div>
-        <button class="delete-btn disabled" data-id="${task.id}">
+        <button class="delete-btn" data-id="${task.id}">
           <span class="material-symbols-outlined">delete</span>
         </button>
       `;
@@ -146,10 +146,6 @@ function completeTask(id) {
   task.completed = !task.completed;
   renderTasks();
   saveTasks(tasks);
-  
-  if (!wasCompleted && task.completed) {
-    triggerConfetti();
-  }
 }
 
 function deleteTask(id) {
