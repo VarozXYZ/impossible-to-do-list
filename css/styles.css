@@ -186,10 +186,10 @@ body {
   }
 }
 
-.struggle-word {
+.struggle-title .struggle-word {
   position: relative;
   display: inline-block;
-  color: var(--primary);
+  color: var(--primary) !important;
 }
 
 .text-primary {
