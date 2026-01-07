@@ -36,6 +36,11 @@ header h1 {
 
 header img {
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  transition: transform 0.3s ease;
+}
+
+header img:hover {
+  transform: scale(1.1) rotate(5deg);
 }
 
 #taskForm {
@@ -68,6 +73,11 @@ header img {
 #addTaskBtn:hover {
   background-color: var(--secondary);
   transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(78, 205, 196, 0.4);
+}
+
+#addTaskBtn:active {
+  transform: scale(0.98);
 }
 
 #taskList {
@@ -117,6 +127,11 @@ header img {
 .btn-complete:hover {
   background-color: #27ae60;
   transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(46, 204, 113, 0.4);
+}
+
+.btn-complete:active {
+  transform: scale(0.95);
 }
 
 .btn-delete {
@@ -132,6 +147,11 @@ header img {
 .btn-delete:hover {
   background-color: #c0392b;
   transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(231, 76, 60, 0.4);
+}
+
+.btn-delete:active {
+  transform: scale(0.95);
 }
 
 .task-card.completed {
