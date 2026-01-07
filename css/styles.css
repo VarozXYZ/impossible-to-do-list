@@ -1,0 +1,23 @@
+:root {
+  --primary: #FF6B6B;
+  --secondary: #4ECDC4;
+  --warning: #FFE66D;
+  --dark: #2C3E50;
+  --light: #F7F9FC;
+  --success: #2ECC71;
+  --danger: #E74C3C;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700&display=swap');
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background-color: var(--light);
+  color: var(--dark);
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Fredoka One', cursive;
+}
+
