@@ -2,7 +2,9 @@
 
 A playful, hand-drawn style to-do list application that makes task management... well, *impossible*! Each task comes with its own mischievous "troll" behavior that makes completing it a challenge. But don't worry - after a few attempts, the trolls give up and you can actually finish your tasks!
 
-![Preview](assets/preview/web-preview.png)
+![Preview](assets/preview/web-preview-final.png)
+
+🌐 **Live Demo**: [https://the-impossible-list.onrender.com/](https://the-impossible-list.onrender.com/)
 
 ## ✨ Features
 
