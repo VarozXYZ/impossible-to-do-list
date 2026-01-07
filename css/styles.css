@@ -1,6 +1,6 @@
 :root {
   --primary: #ff6b6b;
-  --background-light: #fdfbf7;
+  --background-light: #f0f4f8;
   --background-dark: #230f0f;
   --paper: #fffdf5;
   --ink: #2C3E50;
@@ -189,6 +189,11 @@ body {
 .struggle-word {
   position: relative;
   display: inline-block;
+  color: var(--primary);
+}
+
+.text-primary {
+  color: var(--primary);
 }
 
 .struggle-underline {
