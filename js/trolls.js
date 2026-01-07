@@ -161,3 +161,22 @@ function triggerConfetti() {
   }
 }
 
+function showToast(title, message) {
+  const toast = document.getElementById('toast');
+  const toastTitle = toast.querySelector('.toast-title');
+  const toastMessage = toast.querySelector('.toast-message');
+  
+  toastTitle.textContent = title;
+  toastMessage.textContent = message;
+  toast.classList.remove('hidden');
+  
+  setTimeout(() => {
+    hideToast();
+  }, 5000);
+}
+
+function hideToast() {
+  const toast = document.getElementById('toast');
+  toast.classList.add('hidden');
+}
+
