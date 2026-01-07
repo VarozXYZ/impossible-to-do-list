@@ -39,6 +39,12 @@ function renderTasks() {
     `;
     
     taskList.appendChild(li);
+    
+    if (task.trollType === 'mirror' && canActivateTroll(task)) {
+      applyMirrorText(li);
+      incrementTrollCounter(task);
+      saveTasks(tasks);
+    }
   });
   
   attachTrollBehaviors();
@@ -73,6 +79,12 @@ function attachTrollBehaviors() {
       
       cardElement.addEventListener('click', () => {
         clearBlur(cardElement);
+      });
+    }
+    
+    if (task.trollType === 'mirror') {
+      cardElement.addEventListener('dblclick', () => {
+        removeMirrorText(cardElement);
       });
     }
   });

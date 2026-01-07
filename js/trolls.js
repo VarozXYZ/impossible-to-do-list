@@ -51,3 +51,19 @@ function clearBlur(cardElement) {
   }
 }
 
+function applyMirrorText(cardElement) {
+  if (!cardElement) return;
+  const contentElement = cardElement.querySelector('.task-content');
+  if (contentElement) {
+    contentElement.classList.add('mirror-text');
+  }
+}
+
+function removeMirrorText(cardElement) {
+  if (!cardElement) return;
+  const contentElement = cardElement.querySelector('.task-content');
+  if (contentElement) {
+    contentElement.classList.remove('mirror-text');
+  }
+}
+

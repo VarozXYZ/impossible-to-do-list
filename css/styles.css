@@ -167,3 +167,8 @@ footer p {
   transition: filter 0.3s ease;
 }
 
+.mirror-text {
+  transform: scaleX(-1);
+  display: inline-block;
+}
+
