@@ -1,21 +1,24 @@
-const TROLL_TYPES = ['runaway', 'blur', 'mirror', 'shyDelete', 'fakeComplete', 'clingy'];
+const TROLL_TYPES = ['runaway', 'blur', 'mirror', 'fakeComplete', 'clingy'];
 
 let difficultyLevel = 'nightmare';
 const DIFFICULTY_SETTINGS = {
   easy: {
     trollLimit: 1,
     blurIntensity: 3,
-    name: 'Easy'
+    name: 'Easy',
+    clingyDuration: 1000
   },
   medium: {
     trollLimit: 2,
     blurIntensity: 5,
-    name: 'Medium'
+    name: 'Medium',
+    clingyDuration: 1500
   },
   nightmare: {
     trollLimit: 3,
     blurIntensity: 8,
-    name: 'Nightmare'
+    name: 'Nightmare',
+    clingyDuration: 2000
   }
 };
 
@@ -42,20 +45,40 @@ function incrementTrollCounter(task) {
   task.trollCounter++;
 }
 
-function activateRunawayCard(cardElement) {
-  if (!cardElement) return;
+function activateRunawayCard(cardElement, taskId, tasksArray, renderCallback) {
+  if (!cardElement || !taskId || !tasksArray || !renderCallback) return;
   
-  const maxX = window.innerWidth - cardElement.offsetWidth;
-  const maxY = window.innerHeight - cardElement.offsetHeight;
+  const task = tasksArray.find(t => t.id === taskId);
+  if (!task) return;
   
-  const randomX = Math.random() * maxX;
-  const randomY = Math.random() * maxY;
+  const currentIndex = tasksArray.indexOf(task);
+  const taskList = document.getElementById('taskList');
+  if (!taskList) return;
   
-  cardElement.style.position = 'fixed';
-  cardElement.style.left = randomX + 'px';
-  cardElement.style.top = randomY + 'px';
-  cardElement.style.zIndex = '1000';
-  cardElement.style.transition = 'all 0.5s ease';
+  const allWrappers = Array.from(taskList.querySelectorAll('.task-card-wrapper'));
+  if (allWrappers.length <= 1) return;
+  
+  let newIndex;
+  do {
+    newIndex = Math.floor(Math.random() * allWrappers.length);
+  } while (newIndex === currentIndex);
+  
+  const wrapper = cardElement.closest('.task-card-wrapper');
+  if (wrapper) {
+    wrapper.classList.add('runaway-moving');
+  }
+  
+  tasksArray.splice(currentIndex, 1);
+  tasksArray.splice(newIndex, 0, task);
+  
+  renderCallback();
+  
+  setTimeout(() => {
+    const newWrapper = document.querySelector(`[data-id="${taskId}"]`)?.closest('.task-card-wrapper');
+    if (newWrapper) {
+      newWrapper.classList.remove('runaway-moving');
+    }
+  }, 500);
 }
 
 function activateBlurryVision(cardElement) {
@@ -93,31 +116,25 @@ function removeMirrorText(cardElement) {
   }
 }
 
-function activateShyDeleteButton(deleteButton) {
-  if (!deleteButton) return;
+function fakeComplete(cardElement, taskId, tasksArray, renderCallback, saveCallback) {
+  if (!cardElement || !taskId || !tasksArray || !renderCallback || !saveCallback) return;
   
-  const randomOffsetX = (Math.random() - 0.5) * 100;
-  const randomOffsetY = (Math.random() - 0.5) * 100;
+  const task = tasksArray.find(t => t.id === taskId);
+  if (!task) return;
   
-  deleteButton.style.setProperty('--shy-x', randomOffsetX + 'px');
-  deleteButton.style.setProperty('--shy-y', randomOffsetY + 'px');
-  deleteButton.classList.add('shy');
+  const taskIndex = tasksArray.indexOf(task);
+  tasksArray.splice(taskIndex, 1);
+  tasksArray.push(task);
   
-  setTimeout(() => {
-    deleteButton.classList.remove('shy');
-    deleteButton.style.removeProperty('--shy-x');
-    deleteButton.style.removeProperty('--shy-y');
-  }, 500);
-}
-
-function fakeComplete(cardElement) {
-  if (!cardElement) return;
-  
-  cardElement.classList.add('completed', 'fake-complete');
+  task.completed = true;
+  renderCallback();
+  saveCallback();
   
   setTimeout(() => {
-    cardElement.classList.remove('completed', 'fake-complete');
-  }, 1000);
+    task.completed = false;
+    renderCallback();
+    saveCallback();
+  }, 1500);
 }
 
 let clingyCardElement = null;
@@ -140,9 +157,10 @@ function activateClingyCard(cardElement) {
   
   document.addEventListener('mousemove', clingyMouseMoveHandler);
   
+  const duration = DIFFICULTY_SETTINGS[difficultyLevel].clingyDuration;
   setTimeout(() => {
     deactivateClingyCard();
-  }, 3000);
+  }, duration);
 }
 
 function deactivateClingyCard() {

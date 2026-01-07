@@ -65,8 +65,14 @@ function renderTasks() {
     wrapper.appendChild(card);
     taskList.appendChild(wrapper);
     
-    if (task.trollType === 'mirror' && canActivateTroll(task)) {
+    if (task.trollType === 'mirror' && canActivateTroll(task) && !task.completed) {
       applyMirrorText(card);
+      incrementTrollCounter(task);
+      saveTasks(tasks);
+    }
+    
+    if (task.trollType === 'blur' && canActivateTroll(task) && !task.completed) {
+      activateBlurryVision(card);
       incrementTrollCounter(task);
       saveTasks(tasks);
     }
@@ -83,47 +89,11 @@ function attachTrollBehaviors() {
     if (task.trollType === 'runaway' && canActivateTroll(task)) {
       cardElement.addEventListener('mouseenter', () => {
         if (canActivateTroll(task)) {
-          activateRunawayCard(cardElement);
+          activateRunawayCard(cardElement, task.id, tasks, renderTasks);
           incrementTrollCounter(task);
           saveTasks(tasks);
         }
       });
-    }
-    
-    if (task.trollType === 'blur' && canActivateTroll(task)) {
-      const contentElement = cardElement.querySelector('.task-title');
-      if (contentElement) {
-        contentElement.addEventListener('mouseenter', () => {
-          if (canActivateTroll(task)) {
-            activateBlurryVision(cardElement);
-            incrementTrollCounter(task);
-            saveTasks(tasks);
-          }
-        });
-      }
-      
-      cardElement.addEventListener('click', () => {
-        clearBlur(cardElement);
-      });
-    }
-    
-    if (task.trollType === 'mirror') {
-      cardElement.addEventListener('dblclick', () => {
-        removeMirrorText(cardElement);
-      });
-    }
-    
-    if (task.trollType === 'shyDelete' && canActivateTroll(task)) {
-      const deleteButton = cardElement.querySelector('.delete-btn');
-      if (deleteButton) {
-        deleteButton.addEventListener('mouseenter', () => {
-          if (canActivateTroll(task)) {
-            activateShyDeleteButton(deleteButton);
-            incrementTrollCounter(task);
-            saveTasks(tasks);
-          }
-        });
-      }
     }
   });
 }
@@ -135,7 +105,7 @@ function completeTask(id) {
   if (task.trollType === 'fakeComplete' && canActivateTroll(task) && !task.completed) {
     const cardElement = document.querySelector(`[data-id="${task.id}"]`);
     if (cardElement) {
-      fakeComplete(cardElement);
+      fakeComplete(cardElement, task.id, tasks, renderTasks, saveTasks);
       incrementTrollCounter(task);
       saveTasks(tasks);
       return;
@@ -145,8 +115,13 @@ function completeTask(id) {
   const wasCompleted = task.completed;
   task.completed = !task.completed;
   
-  // If task was just completed, move it to the end of the list
   if (task.completed && !wasCompleted) {
+    const cardElement = document.querySelector(`[data-id="${task.id}"]`);
+    if (cardElement) {
+      clearBlur(cardElement);
+      removeMirrorText(cardElement);
+    }
+    
     const taskIndex = tasks.indexOf(task);
     tasks.splice(taskIndex, 1);
     tasks.push(task);
@@ -195,7 +170,7 @@ taskList.addEventListener('click', (e) => {
     return;
   }
   
-  if (checkBtn && !checkBtn.classList.contains('completed-check')) {
+  if (checkBtn) {
     e.preventDefault();
     e.stopPropagation();
     const id = checkBtn.getAttribute('data-id');
