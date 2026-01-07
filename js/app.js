@@ -47,3 +47,11 @@ function renderTasks() {
   });
 }
 
+function completeTask(id) {
+  const task = tasks.find(t => t.id === id);
+  if (task) {
+    task.completed = !task.completed;
+    renderTasks();
+  }
+}
+
