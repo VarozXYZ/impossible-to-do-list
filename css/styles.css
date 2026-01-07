@@ -134,3 +134,20 @@ header img {
   transform: scale(1.05);
 }
 
+.task-card.completed {
+  background-color: #e8f8f5;
+  border-color: var(--success);
+  opacity: 0.8;
+}
+
+.task-card.completed .task-content {
+  text-decoration: line-through;
+  color: #7f8c8d;
+  font-style: italic;
+}
+
+.task-card.completed .btn-complete {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+}
+
