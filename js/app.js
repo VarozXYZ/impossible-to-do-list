@@ -123,6 +123,19 @@ function completeTask(id) {
 }
 
 function deleteTask(id) {
+  const task = tasks.find(t => t.id === id);
+  if (!task) return;
+  
+  if (task.trollType === 'clingy' && canActivateTroll(task)) {
+    const cardElement = document.querySelector(`[data-id="${task.id}"]`);
+    if (cardElement) {
+      activateClingyCard(cardElement);
+      incrementTrollCounter(task);
+      saveTasks(tasks);
+      return;
+    }
+  }
+  
   tasks = tasks.filter(t => t.id !== id);
   renderTasks();
   saveTasks(tasks);

@@ -97,3 +97,44 @@ function fakeComplete(cardElement) {
   }, 1000);
 }
 
+let clingyCardElement = null;
+let clingyMouseMoveHandler = null;
+
+function activateClingyCard(cardElement) {
+  if (!cardElement) return;
+  
+  clingyCardElement = cardElement;
+  cardElement.style.position = 'fixed';
+  cardElement.style.zIndex = '1000';
+  cardElement.style.transition = 'none';
+  
+  clingyMouseMoveHandler = (e) => {
+    if (clingyCardElement) {
+      clingyCardElement.style.left = (e.clientX - cardElement.offsetWidth / 2) + 'px';
+      clingyCardElement.style.top = (e.clientY - cardElement.offsetHeight / 2) + 'px';
+    }
+  };
+  
+  document.addEventListener('mousemove', clingyMouseMoveHandler);
+  
+  setTimeout(() => {
+    deactivateClingyCard();
+  }, 3000);
+}
+
+function deactivateClingyCard() {
+  if (clingyMouseMoveHandler) {
+    document.removeEventListener('mousemove', clingyMouseMoveHandler);
+    clingyMouseMoveHandler = null;
+  }
+  
+  if (clingyCardElement) {
+    clingyCardElement.style.position = '';
+    clingyCardElement.style.left = '';
+    clingyCardElement.style.top = '';
+    clingyCardElement.style.zIndex = '';
+    clingyCardElement.style.transition = '';
+    clingyCardElement = null;
+  }
+}
+
